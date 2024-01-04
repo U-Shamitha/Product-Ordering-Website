@@ -3,17 +3,22 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import authContext from '../../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faPerson, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faLock, faPerson, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const LoginPage = () => {
   const {setAuthenticated} = useContext(authContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const navigate = useNavigate();
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
+  };
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const handlePasswordChange = (e) => {
@@ -94,14 +99,24 @@ const LoginPage = () => {
       <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Password</label>
       <div className="flex">
         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-blue-500 border rounded-e-0 border-gray-300 rounded-s-md">
-        <FontAwesomeIcon icon={faLock} color='white'/>
+          <FontAwesomeIcon icon={faLock} color="white" />
         </span>
-        <input type="password" id="password" 
-        className="mb-0 rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" 
-        placeholder="your password"
-        onChange={handlePasswordChange}
+        <input
+          type={showPassword ? 'text' : 'password'} // Toggle between 'text' and 'password'
+          id="password"
+          className="mb-0 rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
+          placeholder="your password"
+          value={password}
+          onChange={handlePasswordChange}
         />
-      </div>
+        <button
+          type="button"
+          onClick={handleTogglePassword}
+          className="inline-flex items-center px-3 text-sm text-gray-900 bg-blue-500 border rounded-e-lg border-gray-300 rounded-s-md ml-2 cursor-pointer"
+        >
+          <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} color="white" />
+        </button>
+       </div>
       {errorMsg && <p className='pt-5 pl-2 text-red-600'>! {errorMsg}</p>}
       <button type="submit" className="w-full bg-blue-500 text-white p-2 mt-6 rounded">
         Log In
