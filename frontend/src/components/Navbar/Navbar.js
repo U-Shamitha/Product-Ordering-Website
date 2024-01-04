@@ -28,7 +28,7 @@ const Navbar=()=>{
       marginLeft: showSidebar ? '250px' : '0',
       transition: 'margin-left 0.3s ease',
     }}>
-      <AppBar color='transparent' style={{backgroundColor:'white', height:'60px', zIndex: showSidebar ? 10 : 1100}} >
+      <AppBar width="100vw" color='transparent' style={{backgroundColor:'white', height:'60px', zIndex: showSidebar ? 10 : 1100}} >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             size="large"

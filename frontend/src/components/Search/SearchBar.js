@@ -55,7 +55,7 @@ const SearchBar = ({setProductName, setSelectedPrices}) => {
   };
 
   return (
-    <div className="container p-4" style={{marginTop:'40px', marginLeft:'40px'}}>
+    <div className="container p-4" style={{marginTop:'40px', paddingLeft:'40px'}}>
       <form className={classes.searchForm}>
         <div className="flex gap-5 flex-col sm:justify-evenly sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0">
           <div className='relative' style={{flexGrow:'1'}}>

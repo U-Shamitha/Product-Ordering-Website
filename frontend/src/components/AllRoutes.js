@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Routes,
   Navigate,
@@ -26,11 +26,11 @@ const AllRoutes = () => {
        <cartContext.Provider value={{ cartProducts, setCartProducts }}>
         <Navbar/>
         <Routes>
-          <Route path="/" element={<Navigate to="/home"/>}/>
+          <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
           <Route path="/login" element={<LoginPage />} />
-            <Route element={<ProtectedRoute><Home/></ProtectedRoute>} path="/home" exact/>
-            <Route element={<ProtectedRoute><CartGrid/></ProtectedRoute>} path="/cart" exact/>
-            <Route element={<ProtectedRoute><Profile user={JSON.parse(localStorage.getItem("currentUser"))}/></ProtectedRoute>} path="/profile" exact/>
+          <Route element={<ProtectedRoute><Home/></ProtectedRoute>} path="/home" exact/>
+          <Route element={<ProtectedRoute><CartGrid/></ProtectedRoute>} path="/cart" exact/>
+          <Route element={<ProtectedRoute><Profile user={JSON.parse(localStorage.getItem("currentUser"))}/></ProtectedRoute>} path="/profile" exact/>
         </Routes>
         </cartContext.Provider>
         </authContext.Provider>

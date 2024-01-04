@@ -26,7 +26,7 @@ const Profile = ({user}) => {
   };
 
   return (
-    <div className="shadow-shadow-500 shadow-3xl rounded-primary relative mx-auto flex h-full w-full max-w-[550px] flex-col items-center bg-cover bg-clip-border p-[16px] rounded" style={{marginTop:"100px", boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+    <div className="shadow-shadow-500 shadow-3xl rounded-primary relative mx-auto flex h-full w-full max-w-[350px] sm:max-w-[550px] flex-col items-center bg-cover bg-clip-border p-[16px] rounded" style={{marginTop:"100px", boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
     <div className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover" style={{backgroundImage: 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpsPJC2f4TkDGFjUUOEEHlIh2zMkw5DFlRynDeO3t02JI5lkJu_Dfjoy5BF8V5wbBjH4M&usqp=CAU")'}}>
         <div className="absolute -bottom-12 flex h-[88px] w-[88px] items-center justify-center rounded-full bg-white border-[4px]">
             <img className="h-full w-full rounded-full" src={user ? user.image:"https://i.ibb.co/6YbS9ff/avatar11.png"} alt="" />
@@ -49,7 +49,7 @@ const Profile = ({user}) => {
         <p className="text-lightSecondary text-sm font-bold">ID</p>
         <h3 className="text-bluePrimary text-2sm ">{user.id}</h3>
         </div>
-        <div className="flex gap-7 items-center justify- w-[450px]">
+        <div className="flex gap-7 items-center justify- w-[300px]">
         <p className="text-lightSecondary text-sm font-bold">Token</p>
         <p className="text-bluePrimary text-sm font-normal" style={{overflowX:'scroll'}}>{checkTokenExpiration('currentUserToken') ?  getCookie('currentUserToken') : 'Token expired'}</p>
         </div>
