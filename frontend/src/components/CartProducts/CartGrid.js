@@ -17,7 +17,7 @@ const CartGrid = () => {
 
   return (
     <>
-    <div>
+    <div style={{paddingBottom:'20px'}}>
       <div  className='flex justify-between'>
       <p className='pt-20 pl-10 text-lg text-base'>Total Products: {cartProducts ? cartProducts.length : 0}</p>
       <p className='pt-20 pr-10 text-lg text-base'>Total Amount: ${cartProducts.reduce((prev, current)=> prev+getDiscountedPrice(current.price, current.discountPercentage), 0).toFixed(2)}</p>
