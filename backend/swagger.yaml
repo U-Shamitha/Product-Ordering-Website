@@ -1,0 +1,373 @@
+paths:
+  /user/signup:
+    post:
+      summary: User signup
+      description: Endpoint for user registration      
+      tags:
+        - User
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                phone:
+                  type: string
+                name:
+                  type: string
+                password:
+                  type: string
+                profileImage:
+                  type: file
+                  format: binary
+                  description: "Upload an image file (JPEG or PNG)"
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Bad request. Check request body.
+        '409':
+          description: User with the same email or phone number already exists.
+        '500':
+          description: Internal Server Error
+  /user/login:
+    post:
+      summary: User login
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email_or_phone:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token generated successfully
+        '401':
+          description: Unauthorized - Invalid credentials
+        '500':
+          description: Internal Server Error
+
+  /user:
+    get:
+      summary: Get own details by User
+      tags:
+        - User
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User details retrieved successfully
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+    patch:
+      summary: Modify own details by User
+      tags:
+        - User
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                profileImage:
+                  type: file
+                  format: binary
+                  description: "Upload an image file (JPEG or PNG)"
+      responses:
+        '200':
+          description: User details modified successfully
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+    delete:
+      summary: Delete own uaccount by User
+      tags:
+        - User
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User account deleted successfully
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+  /admin/signup:
+    post:
+      summary: Admin signup
+      description: Endpoint for admin registration      
+      tags:
+        - Admin
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                phone:
+                  type: string
+                name:
+                  type: string
+                password:
+                  type: string
+                profileImage:
+                  type: file
+                  format: binary
+                  description: "Upload an image file (JPEG or PNG)"
+      responses:
+        '201':
+          description: Admin created successfully
+        '400':
+          description: Bad request. Check request body.
+        '409':
+          description: Admin with the same email or phone number already exists.
+        '500':
+          description: Internal Server Error
+
+  /admin/login:
+    post:
+      summary: Admin login
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email_or_phone:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token generated successfully
+        '401':
+          description: Unauthorized - Invalid credentials
+        '500':
+          description: Internal Server Error
+  
+  /admin/users:
+    get:
+      summary: Get All User Details by Admin
+      tags:
+        - Admin
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: All User details retrieved successfully
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+  /admin/user/{userId}:
+    patch:
+      summary: Modify User Details by Admin
+      tags:
+        - Admin
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: User ID path parameter
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                profileImage:
+                  type: file
+                  format: binary
+                  description: "Upload an image file (JPEG or PNG)"
+      responses:
+        '200':
+          description: User details modified successfully
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+    
+    delete:
+      summary: Delete user account by Admin
+      tags:
+        - Admin
+      parameters:
+        - name: token
+          in: header
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: User ID path parameter
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User account deleted successfully
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+  /admin:
+    get:
+      summary: Get own details by Admin
+      tags:
+        - Admin
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Admin details retrieved successfully
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+    patch:
+      summary: Modify own details by Amdin
+      tags:
+        - Admin
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                profileImage:
+                  type: file
+                  format: binary
+                  description: "Upload an image file (JPEG or PNG)"
+      responses:
+        '200':
+          description: Admin details modified successfully
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+    delete:
+      summary: Delete own account by Admin
+      tags:
+        - Admin
+      parameters:
+        - in: header
+          name: token
+          description: JWT token for authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Admin account deleted successfully
+        '401':
+          description: Unauthorized - Token not provided or invalid
+        '403':
+          description: Forbidden - Insufficient privileges
+        '500':
+          description: Internal Server Error
+
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
