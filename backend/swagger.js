@@ -15,12 +15,12 @@ const options = {
     },
     servers: [
       {
-        url: process.env.LOCAL_SERVER_URL,
-        description: "Local server"
-      },
-      {
         url: process.env.LIVE_SERVER_URL,
         description: "Live server"
+      },
+      {
+        url: process.env.LOCAL_SERVER_URL,
+        description: "Local server"
       },
     ]
   },
