@@ -5,10 +5,6 @@ const { validationResult } = require("express-validator");
 const { cloudinary } = require("../config/cloudinaryConfig");
 
 async function adminSingup(req, res) { 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
 
     const { email, phone, name, password } = req.body;
 
@@ -81,7 +77,7 @@ async function adminLogin(req, res) {
   if(!user){
     return res
     .status(404)
-    .json({ message: "Admin not found with given credentials" });
+    .json({ message: "Admin not found" });
   }
   if (!(await bcrypt.compare(password, user.password))) {
     return res.status(401).json({ message: "Incorrect Password" });

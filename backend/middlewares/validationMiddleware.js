@@ -13,7 +13,7 @@ const validateImageUpload = [
         throw new Error('Profile image is required');
       }
 
-      // Check if the uploaded file is an image (you can adjust the allowed mimetypes as needed)
+      // Check if the uploaded file is an image
       const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (!allowedImageTypes.includes(req.file.mimetype)) {
         throw new Error('Invalid image format. Please upload a JPEG, PNG, or GIF file.');
@@ -38,7 +38,7 @@ const optionalImageUploadValidation = [
       return true
     }
 
-    // Check if the uploaded file is an image (you can adjust the allowed mimetypes as needed)
+    // Check if the uploaded file is an image
     const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (!allowedImageTypes.includes(req.file.mimetype)) {
       throw new Error('Invalid image format. Please upload a JPEG, PNG, or GIF file.');
@@ -105,7 +105,5 @@ const modifyUserDetailsValidation = [
     optionalImageUploadValidation
 ];
 
-
-//Admin Validations------------------------------------
 
 module.exports = { signupValidation, loginValidation, validateUserId, modifyUserDetailsValidation }

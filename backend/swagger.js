@@ -7,19 +7,19 @@ const options = {
       title: 'User Mangaement API',
       description: "API for user management with authentication and authorization",
       contact: {
-        name: "Shamitha",
-        email: "shamitha19102002@gmail.com",
-        url: ""
+        name: process.env.CONTACT_NAME,
+        email: process.env.CONTACT_EMAIL,
+        url: process.env.CONTACT_URL
       },
       version: '1.0.0',
     },
     servers: [
       {
-        url: "http://localhost:3000/",
+        url: process.env.LOCAL_SERVER_URL,
         description: "Local server"
       },
       {
-        url: "<your live url here>",
+        url: process.env.LIVE_SERVER_URL,
         description: "Live server"
       },
     ]
