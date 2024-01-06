@@ -271,7 +271,7 @@ async function modifyOwnDetailsByAdmin(req, res) {
               console.error('Error uploading new image:', error);
               return res.status(500).json({ message: "Internal Server Error" });
             } else {
-              // Update the image URL or public_id in your database
+              // Update the image URL in database
               console.log('Updated image URL:', result.secure_url);
               user.profileImage = result.secure_url;
               await user.save(); // Save the updated user document
